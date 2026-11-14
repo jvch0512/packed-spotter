@@ -1,0 +1,41 @@
+== normal.exe
+size 35352 bytes, entropy 4.78 bits/byte, PE file
+verdict: looks normal (score 0/100)
+  - no packing indicators found
+
+sections
+  .text     raw   20480  virt   20480  entropy 4.74
+  .rdata    raw    8192  virt    8192  entropy 4.74
+  .data     raw    2048  virt    4096  entropy 0.14
+  .rsrc     raw    4096  virt    4096  entropy 4.76
+
+entropy map (one character per 512 bytes)
+  .*+++++++++++++++++++++++++++++++++++++++++++++++++++++++    +++
+  +++++=
+
+== upx-like.exe
+size 26112 bytes, entropy 7.95 bits/byte, PE file
+verdict: likely packed or encrypted (score 100/100)
+  - most of the file is near-random data (94% of windows at 7.2+ bits/byte)
+  - section names used by known packers
+  - a section with no data on disk but a large virtual size: the classic unpacking target
+  - writable and executable section
+  - high-entropy section
+
+sections
+  UPX0      raw       0  virt   65536  entropy 0.00  <- writable and executable; empty on disk, large in memory (unpacking target); known packer section name
+  UPX1      raw   24576  virt   24576  entropy 7.99  <- writable and executable; high entropy (compressed or encrypted); known packer section name
+  .rsrc     raw    1024  virt    1024  entropy 4.73
+
+entropy map (one character per 512 bytes)
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@++
+
+== encrypted-blob.bin
+size 40960 bytes, entropy 8.00 bits/byte, raw file
+verdict: suspicious (score 45/100)
+  - most of the file is near-random data (100% of windows at 7.2+ bits/byte)
+
+entropy map (one character per 512 bytes)
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@
+
