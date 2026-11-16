@@ -2,6 +2,8 @@
 
 Malware is usually packed or encrypted so that scanners cannot read it. Packing leaves a fingerprint: huge entropy, odd sections, and an empty section that unpacks itself into memory. packed-spotter reads a file, scores how likely it is packed, and shows you where.
 
+![Terminal demo of packed-spotter on its sample data](docs/demo.svg)
+
 **Live demo:** https://jvch0512.github.io/packed-spotter/ (an entropy map of a synthetic UPX-like sample, not real malware)
 
 C++17, no dependencies, one binary.
